@@ -1,0 +1,9 @@
+boot2docker --vbox-share="`pwd`" start
+get code
+
+mkdir data  && sudo mount -t vboxsf Users/bob/Documents/github/messageBoard data
+
+docker run \
+    -v `pwd`/data:/app-install \
+    dcb9/message-board \
+    cp -a /app/. /app-install
