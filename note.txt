@@ -14,3 +14,6 @@ docker stop message-board
 docker rm message-board
 docker rmi dcb9/message-board
 docker build -t dcb9/message-board .
+
+
+docker run -p 8888:80 --name message-board dcb9/message-board

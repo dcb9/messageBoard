@@ -14,14 +14,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
 	$sql = "select * from bobtest limit 9999999";        
-	$data = Yii::$app->db->createCommand($sql)->execute();
-	var_dump($data);
+	// $data = Yii::$app->db->createCommand($sql)->execute();
+	var_dump($sql);
     }
 
     public function actionI()
     {
 	    $sql = "insert into bobtest (name) values ('aaaa'. date('Y-m-d H:i:s'))";
-	    $data = Yii::$app->db->createCommand($sql)->execute();
-	    var_dump($data);
+	    // $data = Yii::$app->db->createCommand($sql)->execute();
+	    var_dump($sql);
     }
 }

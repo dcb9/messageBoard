@@ -8,4 +8,4 @@ RUN chmod 755 /app/docker_files/*.sh
 
 EXPOSE 80
 #  3306
-CMD ["/docker_files/run.sh"]
+CMD ["/app/docker_files/run.sh"]

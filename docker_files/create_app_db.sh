@@ -14,6 +14,6 @@ done
 mysql -uroot -e "DROP DATABASE IF EXISTS yii2basic"
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS yii2basic DEFAULT cOLLATE utf8_unicode_ci"
 
-mysql -uroot yii2basic < docker_files/init_app_db.sql
+mysql -uroot yii2basic < /app/docker_files/init_app_db.sql
 
 mysqladmin -uroot shutdown

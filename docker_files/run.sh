@@ -9,8 +9,8 @@ if [[ ! -d $VOLUME_HOME/mysql  ]]; then
 	echo "=> Installing MySQL ..."
 	mysql_install_db > /dev/null 2>&1
 	echo "=> Done!"  
-	/docker_files/create_mysql_admin_user.sh
-	/docker_files/create_app_db.sh
+	/create_mysql_admin_user.sh
+	/app/docker_files/create_app_db.sh
 else
 	echo "=> Using an existing volume of MySQL"
 fi
