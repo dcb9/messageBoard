@@ -1,11 +1,12 @@
 #!/bin/bash
 
-/usr/bin/mysqld_safe > /dev/null 2>&1 &
+mysql_upgrade
+/usr/bin/mysqld_safe 2>&1 &
 
 RET=1
 while [[ RET -ne 0 ]]; do
     echo "=> Waiting for confirmation of MySQL service startup"
-    sleep 5
+    sleep 2
     mysql -uroot -e "status" > /dev/null 2>&1
     RET=$?
 done
