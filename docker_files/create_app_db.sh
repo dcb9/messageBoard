@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mysql_upgrade
+mysql_upgrade >/dev/null 2>&1
+
 /usr/bin/mysqld_safe 2>&1 &
 
 RET=1
@@ -11,9 +12,7 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
-mysql -uroot -e "DROP DATABASE IF EXISTS yii2basic"
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS yii2basic DEFAULT cOLLATE utf8_unicode_ci"
-
-mysql -uroot yii2basic < /app/docker_files/init_app_db.sql
+/app/yii migrate --interactive=0
 
 mysqladmin -uroot shutdown
