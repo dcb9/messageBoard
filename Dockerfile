@@ -4,14 +4,15 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN rm -rf /app
 ADD . /app
+RUN sed -i '4s/true/false/g' /app/web/index.php ; sed -i '5s/dev/prod/g' /app/web/index.php
 RUN chown -R www-data:www-data /app
 
-RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
-RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
-ENV IMAGE_PRODUCTION_APT_GET_DATE 2015-01-07-22-44
-RUN apt-get install -y mysql-client php5-xsl php5-intl php5-curl php5-gd curl && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get install -y python-software-properties python3-software-properties software-properties-common
+RUN add-apt-repository ppa:ondrej/php5-oldstable
+RUN apt-get update -y 
+RUN apt-cache policy php5 php5-curl php5-gd php5-xsl php5-intl
+RUN apt-get install -y mysql-client php5-xsl php5-intl php5-curl php5-gd curl
+RUN echo 'extension=mcrypt.so'>/etc/php5/cli/conf.d/20-mcrypt.ini && cp -a /etc/php5/cli/conf.d/20-mcrypt.ini /etc/php5/apache2/conf.d/
 
 WORKDIR  /app
 
@@ -30,7 +31,6 @@ RUN chmod 755 /app/docker_files/*.sh
 RUN chmod -R 777 /app/web/assets /app/runtime
 
 
-RUN echo 'extension=mcrypt.so'>/etc/php5/cli/conf.d/20-mcrypt.ini && cp -a /etc/php5/cli/conf.d/20-mcrypt.ini /etc/php5/apache2/conf.d/
 EXPOSE 80
 #  3306
 CMD ["/app/docker_files/run.sh"]

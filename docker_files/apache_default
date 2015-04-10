@@ -4,14 +4,16 @@
         DocumentRoot /var/www/html/web
         <Directory />
                 Options FollowSymLinks
-                AllowOverride None
+                AllowOverride All
         </Directory>
         <Directory /var/www/html/web>
+                AllowOverride All
 		# use mod_rewrite for pretty URL support
 		RewriteEngine on
 		# If a directory or a file exists, use the request directly
 		RewriteCond %{REQUEST_FILENAME} !-f
 		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule . index.php
                 Order allow,deny
                 allow from all
         </Directory>
