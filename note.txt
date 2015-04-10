@@ -17,3 +17,4 @@ docker build -t dcb9/message-board .
 
 
 docker run -p 8888:80 -v `pwd`:/app --name message-board dcb9/message-board
+docker run -p 8888:80 --name message-board dcb9/message-board
