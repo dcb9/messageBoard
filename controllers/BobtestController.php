@@ -14,14 +14,16 @@ class BobtestController extends Controller
     public function actionIndex()
     {
 	$sql = "select * from bobtest limit 9999999";        
-	$data = Yii::$app->db->createCommand($sql)->execute();
+	$data = Yii::$app->db->createCommand($sql)->all();
 	var_dump($sql);
+	var_dump($data);
     }
 
     public function actionI()
     {
-	    $sql = "insert into bobtest (name) values ('aaaa'. date('Y-m-d H:i:s'))";
+	    $sql = "insert into bobtest (name) values ('aaaa')";
 	    $data = Yii::$app->db->createCommand($sql)->execute();
 	    var_dump($sql);
+	var_dump($data);
     }
 }
